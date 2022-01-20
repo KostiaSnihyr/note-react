@@ -3,7 +3,7 @@ import TextField from '@mui/material/TextField';
 import { Button } from '@mui/material';
 import { generateId } from '../utils';
 
-const NoteForm = ({ onSubmit, isActiveForm }) => {
+const NoteForm = ({ onSubmit, isActiveForm, deactivateForm }) => {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
 
@@ -15,6 +15,15 @@ const NoteForm = ({ onSubmit, isActiveForm }) => {
       title,
       content,
     });
+
+    setTitle('');
+    setContent('');
+  };
+
+  const handleCancel = () => {
+    setTitle('');
+    setContent('');
+    deactivateForm();
   };
 
   return (
@@ -50,7 +59,11 @@ const NoteForm = ({ onSubmit, isActiveForm }) => {
       >
         Create
       </Button>
-      <Button variant="outlined" className="note-app-form-cancel">
+      <Button
+        variant="outlined"
+        className="note-app-form-cancel"
+        onClick={handleCancel}
+      >
         Cancel
       </Button>
     </form>

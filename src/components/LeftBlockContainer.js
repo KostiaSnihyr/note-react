@@ -1,10 +1,14 @@
 import React from 'react';
 import NoteForm from './NoteForm';
 
-const LeftBlockContainer = ({ onSubmit, isActiveForm }) => {
+const LeftBlockContainer = ({ onSubmit, isActiveForm, deactivateForm }) => {
   return (
     <div className="left-block-container">
-      <NoteForm onSubmit={onSubmit} isActiveForm={isActiveForm} />
+      <NoteForm
+        onSubmit={onSubmit}
+        isActiveForm={isActiveForm}
+        deactivateForm={deactivateForm}
+      />
     </div>
   );
 };

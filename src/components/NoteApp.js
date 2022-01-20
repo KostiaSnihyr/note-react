@@ -13,14 +13,23 @@ const NoteApp = () => {
     }
   };
 
+  const deactivateForm = () => {
+    setBoolState(false);
+  };
+
   const createNote = (newNote) => {
     const newNotes = [newNote, ...data];
     setData(newNotes);
+    setBoolState(false);
   };
 
   return (
     <div className="note-app">
-      <LeftBlockContainer onSubmit={createNote} isActiveForm={boolState} />
+      <LeftBlockContainer
+        onSubmit={createNote}
+        isActiveForm={boolState}
+        deactivateForm={deactivateForm}
+      />
       <NoteList items={data} activateForm={activateForm} />
     </div>
   );
