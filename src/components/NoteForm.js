@@ -24,8 +24,6 @@ const NoteForm = ({ onSubmit, isActiveForm, deactivateForm }) => {
     setTitle('');
     setContent('');
     deactivateForm();
-
-    // test
   };
 
   return (
