@@ -16,6 +16,7 @@ const LeftBlockContainer = ({
           onSubmit={onSubmit}
           isActiveForm={isActiveForm}
           deactivateForm={deactivateForm}
+          activeArticleData={activeArticleData}
         />
       </div>
     );

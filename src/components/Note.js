@@ -5,7 +5,14 @@ import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 
-const Note = ({ id, title, content, activateArticle, deleteNote }) => {
+const Note = ({
+  id,
+  title,
+  content,
+  activateArticle,
+  deleteNote,
+  editNote,
+}) => {
   const handleArticle = () => {
     activateArticle(id, title, content);
   };
@@ -16,6 +23,12 @@ const Note = ({ id, title, content, activateArticle, deleteNote }) => {
     deleteNote(id);
   };
 
+  const handleEdit = (event) => {
+    event.stopPropagation();
+
+    editNote(id, title, content);
+  };
+
   return (
     <Card variant="outlined" className="note-card" onClick={handleArticle}>
       <CardContent>
@@ -23,7 +36,7 @@ const Note = ({ id, title, content, activateArticle, deleteNote }) => {
         <Typography>{content}</Typography>
       </CardContent>
       <CardActions>
-        <Button variant="contained" color="primary">
+        <Button variant="contained" color="primary" onClick={handleEdit}>
           Edit
         </Button>
         <Button variant="contained" color="error" onClick={handleDelete}>

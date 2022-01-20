@@ -30,14 +30,24 @@ const NoteApp = () => {
   };
 
   const deleteNote = (deleteElementId) => {
-    // console.log(data);
-
     const filteredData = data.filter(
       (element) => element.id !== deleteElementId
     );
 
+    if (activeArticleData.id === deleteElementId) {
+      activateArticle(0, 'You deleted this Article');
+    }
+
     setData(filteredData);
-    // setData([filteredData]);
+  };
+
+  const editNote = (id, title, content) => {
+    data.map((item) => {
+      if (item.id === id) {
+        activateForm(true);
+        console.log('asdfasd', id, title, content);
+      }
+    });
   };
 
   return (
@@ -55,6 +65,7 @@ const NoteApp = () => {
         activateForm={activateForm}
         activateArticle={activateArticle}
         deleteNote={deleteNote}
+        editNote={editNote}
       />
     </div>
   );

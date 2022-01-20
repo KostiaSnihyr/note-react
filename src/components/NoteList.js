@@ -2,7 +2,13 @@ import React from 'react';
 import { Button } from '@mui/material';
 import Note from './Note';
 
-const NoteList = ({ items, activateForm, activateArticle, deleteNote }) => {
+const NoteList = ({
+  items,
+  activateForm,
+  activateArticle,
+  deleteNote,
+  editNote,
+}) => {
   const handleNoteForm = () => {
     activateForm(true);
   };
@@ -28,6 +34,7 @@ const NoteList = ({ items, activateForm, activateArticle, deleteNote }) => {
             content={item.content}
             activateArticle={activateArticle}
             deleteNote={deleteNote}
+            editNote={editNote}
           />
         ))}
       </div>
