@@ -1,13 +1,9 @@
 import React from 'react';
 import './App.css';
-import NoteList from './components/NoteList';
+import NoteApp from './components/NoteApp';
 
 function App() {
-  return (
-    <div className="notes-app">
-      <NoteList />
-    </div>
-  );
+  return <NoteApp />;
 }
 
 export default App;

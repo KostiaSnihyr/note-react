@@ -1,38 +1,41 @@
 import React, { useState } from 'react';
-
 import TextField from '@mui/material/TextField';
 import { Button } from '@mui/material';
+import { generateId } from '../utils';
 
-function NoteForm(props) {
+const NoteForm = ({ onSubmit, isActiveForm }) => {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    props.onSubmit({
-      id: Math.floor(Math.random() * 10000),
-      text: { title, content },
+    onSubmit({
+      id: generateId(),
+      title,
+      content,
     });
-
-    setTitle('');
-    setContent('');
   };
 
   return (
     <form
-      className="note-form"
+      className={
+        isActiveForm ? 'note-app-form note-app-form-visible' : 'note-app-form'
+      }
       noValidate
       autoComplete="off"
       onSubmit={handleSubmit}
     >
+      <h2 className="note-app-title">Create Note</h2>
       <TextField
+        className="note-app-form-title"
         onChange={(e) => setTitle(e.target.value)}
         value={title}
         label="Title"
         fullWidth
       />
       <TextField
+        className="note-app-form-content"
         onChange={(e) => setContent(e.target.value)}
         value={content}
         label="Content"
@@ -40,12 +43,18 @@ function NoteForm(props) {
         multiline
         rows={4}
       />
-      <Button type="submit" variant="contained">
+      <Button
+        type="submit"
+        variant="contained"
+        className="note-app-form-submit"
+      >
         Create
       </Button>
-      <Button variant="outlined">Cancel</Button>
+      <Button variant="outlined" className="note-app-form-cancel">
+        Cancel
+      </Button>
     </form>
   );
-}
+};
 
 export default NoteForm;

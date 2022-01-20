@@ -1,33 +1,31 @@
-import React, { useState } from 'react';
-import NoteForm from './NoteForm';
+import React from 'react';
+import { Button } from '@mui/material';
 import Note from './Note';
 
-function NoteList() {
-  const [notes, setNotes] = useState([]);
-
-  const addNote = (note) => {
-    const newNotes = [note, ...notes];
-    setNotes(newNotes);
-  };
-
-  const editNote = (noteId, newValue) => {
-    setNotes((prev) =>
-      prev.map((item) => (item.id === noteId ? newValue : item))
-    );
-  };
-
-  const deleteNote = (id) => {
-    const filtedArr = [...notes].filter((note) => note.id !== id);
-    setNotes(filtedArr);
+const NoteList = ({ items, activateForm }) => {
+  const handleNoteForm = () => {
+    activateForm(true);
   };
 
   return (
-    <div>
-      <div>NoteForm</div>
-      <NoteForm onSubmit={addNote} />
-      <Note notes={notes} editNote={editNote} deleteNote={deleteNote} />
+    <div className="note-app-note-list">
+      <div className="note-app-note-list-header">
+        <h2 className="note-app-title">Note List</h2>
+        <Button
+          variant="contained"
+          className="note-app-create-form"
+          onClick={handleNoteForm}
+        >
+          Create Note
+        </Button>
+      </div>
+      <div className="note-app-note-list-container">
+        {items.map((item) => (
+          <Note key={item.id} title={item.title} content={item.content} />
+        ))}
+      </div>
     </div>
   );
-}
+};
 
 export default NoteList;

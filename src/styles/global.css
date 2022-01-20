@@ -1,0 +1,52 @@
+h2 {
+  font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
+}
+
+.note-app {
+  display: flex;
+  width: 100%;
+}
+
+.note-app-form,
+.note-app-note-list {
+  padding: 20px;
+}
+
+.note-app-form {
+  display: none;
+}
+
+.note-app-form-visible {
+  display: block;
+}
+
+.left-block-container,
+.note-app-note-list {
+  width: 50%;
+}
+
+.note-app-form .note-app-form-content {
+  margin: 20px 0;
+}
+
+.note-app-form .note-app-form-submit {
+  margin-right: 20px;
+}
+
+.note-app-note-list-header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.note-app-create-form {
+  height: fit-content;
+}
+
+.note-card {
+  margin-bottom: 20px;
+}
+
+.note-card-header {
+  margin-bottom: 10px !important;
+  font-weight: 900 !important;
+}
