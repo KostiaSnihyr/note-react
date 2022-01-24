@@ -3,21 +3,47 @@ import TextField from '@mui/material/TextField';
 import { Button } from '@mui/material';
 import { generateId } from '../utils';
 
-const NoteForm = ({ onSubmit, isActiveForm, deactivateForm }) => {
-  const [title, setTitle] = useState('');
-  const [content, setContent] = useState('');
+const NoteForm = ({
+  onSubmit,
+  isActiveForm,
+  deactivateForm,
+  isEdit,
+  setIsEdit,
+  editData,
+  setEditData,
+  data,
+  setData,
+}) => {
+  const [title, setTitle] = useState(isEdit ? editData.title : '');
+  const [content, setContent] = useState(isEdit ? editData.content : '');
+  const CHARACTER_LIMIT = 12;
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    onSubmit({
-      id: generateId(),
-      title,
-      content,
-    });
+    if (!isEdit) {
+      onSubmit(
+        {
+          id: generateId(),
+          title,
+          content,
+        },
+        false
+      );
+    } else {
+      onSubmit(
+        {
+          id: editData.id,
+          title,
+          content,
+        },
+        true
+      );
+    }
 
     setTitle('');
     setContent('');
+    setIsEdit(false);
   };
 
   const handleCancel = () => {
@@ -37,11 +63,14 @@ const NoteForm = ({ onSubmit, isActiveForm, deactivateForm }) => {
     >
       <h2 className="note-app-title">Create Note</h2>
       <TextField
+        maxLength={2}
         className="note-app-form-title"
         onChange={(e) => setTitle(e.target.value)}
         value={title}
         label="Title"
         fullWidth
+        // inputProps={{ maxLength: 12 }}
+        helperText={`Max lenght: ${title.length}/${CHARACTER_LIMIT}`}
       />
       <TextField
         className="note-app-form-content"
@@ -51,6 +80,8 @@ const NoteForm = ({ onSubmit, isActiveForm, deactivateForm }) => {
         fullWidth
         multiline
         rows={4}
+        // inputProps={{ maxLength: 12 }}
+        helperText={`Max lenght: ${content.length}/${CHARACTER_LIMIT}`}
       />
       <Button
         type="submit"

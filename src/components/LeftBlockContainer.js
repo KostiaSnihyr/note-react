@@ -8,6 +8,12 @@ const LeftBlockContainer = ({
   deactivateForm,
   boolState,
   activeArticleData,
+  isEdit,
+  setIsEdit,
+  editData,
+  setEditData,
+  data,
+  setData,
 }) => {
   if (boolState) {
     return (
@@ -17,6 +23,12 @@ const LeftBlockContainer = ({
           isActiveForm={isActiveForm}
           deactivateForm={deactivateForm}
           activeArticleData={activeArticleData}
+          isEdit={isEdit}
+          setIsEdit={setIsEdit}
+          editData={editData}
+          setEditData={setEditData}
+          data={data}
+          setData={setData}
         />
       </div>
     );

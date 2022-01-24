@@ -7,6 +7,10 @@ const NoteApp = () => {
   const [data, setData] = useState([]);
   const [boolState, setBoolState] = useState(false);
   const [activeArticleData, setActiveArticleData] = useState({});
+  const [isEdit, setIsEdit] = useState(false);
+  const [editData, setEditData] = useState(null);
+
+  console.log(data);
 
   const activateForm = (status) => {
     if (!boolState) {
@@ -16,6 +20,7 @@ const NoteApp = () => {
 
   const deactivateForm = () => {
     setBoolState(false);
+    setIsEdit(false);
   };
 
   const activateArticle = (id, title, content) => {
@@ -23,9 +28,26 @@ const NoteApp = () => {
     deactivateForm();
   };
 
-  const createNote = (newNote) => {
-    const newNotes = [newNote, ...data];
-    setData(newNotes);
+  const createNote = (newNote, isEdit) => {
+    if (!isEdit) {
+      const newNotes = [newNote, ...data];
+      setData(newNotes);
+    } else {
+      const newNotes = data.map((item) => {
+        if (item.id === newNote.id) {
+          return {
+            id: newNote.id,
+            title: newNote.title,
+            content: newNote.content,
+          };
+        }
+        return item;
+      });
+
+      setData(newNotes);
+      setActiveArticleData(newNote);
+    }
+
     setBoolState(false);
   };
 
@@ -42,12 +64,9 @@ const NoteApp = () => {
   };
 
   const editNote = (id, title, content) => {
-    data.map((item) => {
-      if (item.id === id) {
-        activateForm(true);
-        console.log('asdfasd', id, title, content);
-      }
-    });
+    activateForm(true);
+    setIsEdit(true);
+    setEditData({ id, title, content });
   };
 
   return (
@@ -59,6 +78,12 @@ const NoteApp = () => {
         articleData={data}
         boolState={boolState}
         activeArticleData={activeArticleData}
+        isEdit={isEdit}
+        setIsEdit={setIsEdit}
+        editData={editData}
+        setEditData={setEditData}
+        data={data}
+        setData={setData}
       />
       <NoteList
         items={data}
